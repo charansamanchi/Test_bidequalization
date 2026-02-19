@@ -1,0 +1,30 @@
+/* Global Styles */
+body {
+  font-family: 'SAP Sans', Arial, sans-serif;
+}
+
+/* List Styles */
+.sapMList {
+  background-color: #ffffff;
+}
+
+.sapMOLITitle {
+  font-weight: 600;
+  color: #333333;
+}
+
+.sapMOLINumber {
+  color: #0070c0;
+  font-weight: 500;
+}
+
+/* Page Styles */
+.sapMPage {
+  background-color: #fafafa;
+}
+
+/* Object Attribute */
+.sapMObjectAttribute {
+  color: #666666;
+  font-size: 0.875rem;
+}

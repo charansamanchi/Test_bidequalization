@@ -1,0 +1,22 @@
+<mvc:View
+  controllerName="app.controller.Main"
+  xmlns="sap.m"
+  xmlns:mvc="sap.ui.core.mvc">
+  <Page
+    id="authorsPage"
+    title="Authors"
+    enableScrolling="true">
+    <content>
+      <List
+        id="authorsList"
+        itemPress=".onAuthorPress"
+        items="{view>/authors}">
+        <StandardListItem
+          title="{view>name}"
+          description="{view>born}"
+          type="Active">
+        </StandardListItem>
+      </List>
+    </content>
+  </Page>
+</mvc:View>
