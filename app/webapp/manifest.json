@@ -1,53 +1,41 @@
 {
+  "_version": "1.12.0",
   "sap.app": {
-    "_version": "1.49.0",
-    "id": "app.library",
+    "id": "com.example.capm.authors",
     "type": "application",
     "i18n": "i18n/i18n.properties",
-    "applicationVersion": {
-      "version": "0.0.1"
-    },
-    "title": "{{appTitle}}",
-    "description": "{{appDescription}}",
-    "sourceTemplate": {
-      "id": "@sap/generator-fiori:basic",
-      "version": "1.8.6"
-    }
+    "title": "Authors & Books Manager",
+    "description": "Fiori Elements app for managing authors and books"
   },
   "sap.ui": {
     "technology": "UI5",
-    "icons": {
-      "icon": "",
-      "favIcon": "",
-      "phone": "",
-      "phoneHighRes": "",
-      "tablet": "",
-      "tabletHighRes": ""
-    },
+    "fullWidth": true,
     "deviceTypes": {
       "desktop": true,
       "tablet": true,
       "phone": true
-    },
-    "supportedThemes": [
-      "sap_fiori_3",
-      "sap_fiori_3_dark"
-    ]
+    }
   },
   "sap.ui5": {
-    "flexEnabled": false,
-    "architecture": {
-      "mandatory": [],
-      "preferred": []
+    "dependencies": {
+      "minUI5Version": "1.86.0",
+      "libs": {
+        "sap.ui.core": {},
+        "sap.m": {},
+        "sap.ui.layout": {},
+        "sap.f": {}
+      }
     },
-    "config": {},
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
     "rootView": {
-      "viewName": "app.view.Main",
+      "viewName": "com.example.capm.authors.view.Main",
       "type": "XML",
       "async": true,
       "id": "app"
     },
-    "handleValidation": true,
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
@@ -55,34 +43,29 @@
         "async": true,
         "controlAggregation": "pages",
         "controlId": "app",
-        "clearControlAggregation": false
+        "clearControlAggregation": false,
+        "viewPath": "com.example.capm.authors.view.",
+        "targetAggregation": "pages",
+        "transition": "slide"
       },
       "routes": [
         {
           "pattern": "",
-          "name": "authors",
-          "target": "authors"
+          "name": "list",
+          "target": "list"
         },
         {
-          "pattern": "books/{id}",
-          "name": "books",
-          "target": "books"
+          "pattern": "author/{authorId}",
+          "name": "detail",
+          "target": "detail"
         }
       ],
       "targets": {
-        "authors": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "authorsView",
-          "viewName": "app.view.Authors"
+        "list": {
+          "viewName": "AuthorListReport"
         },
-        "books": {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "booksView",
-          "viewName": "app.view.Books"
+        "detail": {
+          "viewName": "AuthorObjectPage"
         }
       }
     },
@@ -90,29 +73,47 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "app.i18n.i18n"
+          "bundleName": "com.example.capm.authors.i18n.i18n"
+        }
+      },
+      "": {
+        "type": "sap.ui.model.odata.v4.ODataModel",
+        "dataSource": "catalog",
+        "settings": {
+          "synchronizationMode": "None",
+          "operationMode": "Server"
         }
       }
     },
-    "resources": {
-      "css": [
-        {
-          "uri": "css/style.css"
+    "dataSources": {
+      "catalog": {
+        "uri": "/odata/v4/catalog/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "4.0"
         }
-      ]
-    },
-    "contentDensities": {
-      "compact": true,
-      "cozy": true
+      }
     }
   },
-  "sap.platform.abap": {
-    "uri": ""
-  },
-  "sap.platform.hcp": {
-    "uri": ""
-  },
-  "sap.fiori": {
-    "registrationIds": []
+  "sap.ui.generic.app": {
+    "pages": [
+      {
+        "entitySet": "Authors",
+        "component": {
+          "name": "sap.suite.ui.generic.template.ListReport",
+          "list": true
+        },
+        "pages": [
+          {
+            "entitySet": "Books",
+            "component": {
+              "name": "sap.suite.ui.generic.template.ObjectPage"
+            }
+          }
+        ]
+      }
+    ]
   }
 }
+
+

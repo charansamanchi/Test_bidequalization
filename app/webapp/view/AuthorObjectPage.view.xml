@@ -1,0 +1,77 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+  controllerName="com.example.capm.authors.controller.AuthorObjectPage"
+  class="sapUiResponsiveContentPadding">
+  <Page id="detailPage" title="{/author/name}" showNavButton="true" navButtonPress="onNavBack" enableScrolling="true">
+    <headerContent>
+      <Button text="Delete" type="Reject" press="onDeleteAuthor"/>
+    </headerContent>
+    <content>
+      <!-- Object Page Header Section -->
+      <l:BlockLayout>
+        <l:BlockLayoutRow>
+          <l:BlockLayoutCell>
+            <Panel headerText="Author Information" class="sapUiResponsiveMargin">
+              <f:SimpleForm editable="false" layout="ResponsiveGridLayout">
+                <f:content>
+                  <Label text="Name"/>
+                  <Text text="{/author/name}" wrapping="true"/>
+                  <Label text="Birth Date"/>
+                  <Text text="{/author/born}" wrapping="true"/>
+                </f:content>
+              </f:SimpleForm>
+            </Panel>
+          </l:BlockLayoutCell>
+        </l:BlockLayoutRow>
+      </l:BlockLayout>
+
+      <!-- Books Facet (Related Data) -->
+      <Panel headerText="Books ({/books/length})" expandable="true" expanded="true" class="sapUiResponsiveMargin">
+        <headerToolbar>
+          <Toolbar design="Transparent">
+            <ToolbarSpacer/>
+            <Button text="Add Book" press="onAddBook" type="Emphasized" icon="sap-icon://add"/>
+          </Toolbar>
+        </headerToolbar>
+        <Table id="booksTable"
+          items="{/books}"
+          mode="MultiSelect"
+          updateFinished="onTableUpdateFinished"
+          class="sapFioriObjectListPadding">
+          <columns>
+            <Column width="40%" demandPopin="true" minScreenWidth="Tablet">
+              <Label text="Title"/>
+            </Column>
+            <Column width="20%" demandPopin="true" minScreenWidth="Tablet">
+              <Label text="Genre"/>
+            </Column>
+            <Column width="15%" demandPopin="true" minScreenWidth="Tablet">
+              <Label text="Stock"/>
+            </Column>
+            <Column width="15%" demandPopin="true" minScreenWidth="Tablet">
+              <Label text="Price (USD)"/>
+            </Column>
+            <Column width="10%">
+              <Label text="Action"/>
+            </Column>
+          </columns>
+          <items>
+            <ColumnListItem>
+              <cells>
+                <Text text="{title}"/>
+                <Text text="{genre}"/>
+                <Text text="{stock}"/>
+                <Text text="{price}"/>
+                <Button text="Delete" type="Reject" press="onDeleteBook" data-book-id="{ID}"/>
+              </cells>
+            </ColumnListItem>
+          </items>
+          <noData>
+            <IllustratedMessage illustrationType="sap.illustration.IllustrationType.NoBooks"
+              title="No Books"
+              description="This author has no books yet. Add one to get started."/>
+          </noData>
+        </Table>
+      </Panel>
+    </content>
+  </Page>
+</mvc:View>

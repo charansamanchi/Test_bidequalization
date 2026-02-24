@@ -1,0 +1,58 @@
+<mvc:View xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:l="sap.ui.layout" 
+  controllerName="com.example.capm.authors.controller.AuthorListReport"
+  class="sapUiResponsiveContentPadding">
+  <Page id="listPage" title="Authors" showNavButton="false" enableScrolling="true">
+    <headerContent>
+      <Button text="Create" press="onCreateAuthor" type="Emphasized" icon="sap-icon://add"/>
+    </headerContent>
+    <subHeader>
+      <Toolbar design="Transparent">
+        <SearchField id="searchField" placeholder="Search Authors..." 
+          search="onSearch" width="100%"/>
+      </Toolbar>
+    </subHeader>
+    <content>
+      <Table id="authorsTable"
+        items="{/Authors}"
+        selectionMode="Single"
+        updateFinished="onTableUpdateFinished"
+        width="100%"
+        class="sapFioriObjectListPadding">
+        <headerToolbar>
+          <Toolbar id="tbHeader">
+            <Title id="tableTitle" text="Authors ({/count})"/>
+            <ToolbarSpacer/>
+          </Toolbar>
+        </headerToolbar>
+        <columns>
+          <Column width="70%" demandPopin="true" minScreenWidth="Tablet">
+            <Label text="Name"/>
+          </Column>
+          <Column width="30%" demandPopin="true" minScreenWidth="Tablet">
+            <Label text="Birth Date"/>
+          </Column>
+        </columns>
+        <items>
+          <ColumnListItem type="Navigation" press="onAuthorPress">
+            <cells>
+              <ObjectIdentifier text="{name}"/>
+              <Text text="{born}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+        <noData>
+          <IllustratedMessage illustrationType="sap.illustration.IllustrationType.EmptyList"
+            title="No Authors Found"
+            description="Create your first author to get started."/>
+        </noData>
+      </Table>
+    </content>
+    <footer>
+      <Bar id="footer" design="Footer">
+        <contentRight>
+          <Text text="{i18n>recordCount}: {/count}"/>
+        </contentRight>
+      </Bar>
+    </footer>
+  </Page>
+</mvc:View>

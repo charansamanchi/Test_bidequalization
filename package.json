@@ -8,7 +8,9 @@
     "@cap-js/sqlite": "^2"
   },
   "scripts": {
-    "start": "cds-serve"
+    "start": "cds watch",
+    "build": "cds build",
+    "deploy": "cds deploy --to sqlite:dev.db"
   },
   "private": true
 }
