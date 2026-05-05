@@ -59,8 +59,9 @@ class CatalogService extends cds.ApplicationService {
      * Action: createBook
      * Creates a new book
      */
-    this.on("createBook", async (req) => {
-      const { title, genre, stock, price, author_ID } = req.data;
+    this.on("createBook", "Authors", async (req) => {
+      const author_ID = req.params[0].ID;
+      const { title, genre, stock, price } = req.data;
       const { v4: uuid } = require("uuid");
       try {
         const newBook = {

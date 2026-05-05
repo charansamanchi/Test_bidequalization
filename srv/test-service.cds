@@ -32,6 +32,13 @@ service CatalogService {
         {Value: name},
         {Value: born}
       ],
+      Identification: [
+        {
+          $Type: 'UI.DataFieldForAction',
+          Action: 'CatalogService.createBook',
+          Label: 'Add Book'
+        }
+      ],
       PresentationVariant: {
         SortOrder: [{Property: name, Descending: false}],
         Visualizations: ['@UI.LineItem']
@@ -60,6 +67,9 @@ service CatalogService {
   )
   entity Authors as projection on demo.Authors {
     *
+  } actions {
+    action createBook(title: String(255), genre: String(50), stock: Integer, price: Decimal(9,2))
+      returns { success: Boolean };
   };
 
   @(
@@ -112,7 +122,6 @@ service CatalogService {
   action deleteAuthor(ID: UUID) returns {success: Boolean};
   action deleteBook(ID: UUID) returns {success: Boolean};
   action createAuthor(name: String, born: Date) returns {success: Boolean};
-  action createBook(title: String, genre: String, stock: Integer, price: Decimal, author_ID: UUID) returns {success: Boolean};
 }
 
 
