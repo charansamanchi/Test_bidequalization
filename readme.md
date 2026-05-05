@@ -20,3 +20,13 @@ File or Folder | Purpose
 ## Learn More
 
 Learn more at <https://cap.cloud.sap>.
+
+git bash commands
+# Create and switch to new branch
+git checkout -b feature/add-book-bound-action
+
+# Commit staged changes
+git commit -m "feat: convert createBook to bound action on Authors"
+
+# Push new branch and set upstream tracking
+git push -u origin feature/add-book-bound-action
